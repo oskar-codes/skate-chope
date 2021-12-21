@@ -12,7 +12,7 @@
 
 <style scoped>
   .main {
-    background-image: url(../static/pictures/1erephoto.png);
+    background-image: url(../static/pictures/principal.jpg);
     background-repeat: no-repeat;
     background-size: cover;
     width: 80%;
