@@ -6,14 +6,9 @@
   <div class="SUIVEZ-NOUS">
     <h1>SUIVEZ NOUS</h1>
     <img src="pictures/insta.webp">
-    <P>@skatechope</P>
+    <p>@skatechope</p>
     </div>
-
-
-<script async
-    src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap">
-</script>
-   </img>
+    <Map></Map>
   </div>
 
   

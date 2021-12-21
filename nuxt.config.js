@@ -31,11 +31,36 @@ export default {
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
   ],
-
+  a:{
+    apiKey: "AIzaSyAbUbveOjn6VMB1QaAZHIR2hYxFfEbQ2Qo",
+    authDomain: "artridge-website.firebaseapp.com",
+    databaseURL: "https://artridge-website.firebaseio.com",
+    projectId: "artridge-website",
+    storageBucket: "artridge-website.appspot.com",
+    messagingSenderId: "554359864126",
+    appId: "1:554359864126:web:56901925bba81278fb0a6f",
+    measurementId: "G-0KJBNGLJL4"
+  },
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
-    // https://go.nuxtjs.dev/axios
-    '@nuxtjs/axios',
+    [
+      '@nuxtjs/firebase',
+      {
+        config: {
+          apiKey: "AIzaSyAbUbveOjn6VMB1QaAZHIR2hYxFfEbQ2Qo",
+          authDomain: "artridge-website.firebaseapp.com",
+          databaseURL: "https://artridge-website.firebaseio.com",
+          projectId: "artridge-website",
+          storageBucket: "artridge-website.appspot.com",
+          messagingSenderId: "554359864126",
+          appId: "1:554359864126:web:56901925bba81278fb0a6f",
+          measurementId: "G-0KJBNGLJL4"
+        },
+        services: {
+          auth: true
+        }
+      }
+    ]
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
