@@ -1,6 +1,5 @@
 /*section.top-page {
-    background: url('../Image/1ere\ photo.png') ;
-    
+  background: url('../Image/1ere\ photo.png');
 }*/
 
 @font-face {
@@ -28,26 +27,15 @@ html, body {
   text-align: center;
 }
 
+button {
+  border: none;
+  background: white;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 5px;
+}
+
 .section {
   padding: 20px;
-}
-
-.labels {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: space-around;
-}
-
-.label img {
-  width: 200px;
-}
-
-.label h3 {
-  color:#1D2023;
-}
-
-.label p {
-  color: #bebdbd;
-
 }
