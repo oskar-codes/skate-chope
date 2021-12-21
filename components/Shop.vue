@@ -9,7 +9,7 @@
         <h3>T-SHIRT "le classique"</h3>
         <p>€{{ price }}</p>
         <p>
-          Ici vous est présenté le nouveau tee-shirt "le classique". Optez pour un T-shirt basique en coton avec une coupe large. Il est disponible en blanc, et des tailles allant du XS au XXL. Pour commander tout produit nous vous proposons de répondre au formulaire disponible en description du compte et en storie en nous renvoyant une capture d'écran par message ou le formulaire en main propre, avec dans les deux cas une validation du paiement quel que soit le moyen choisi. Prix du tee-shirts « le classique ».
+          Ici vous est présenté le nouveau tee-shirt "le classique". Optez pour un T-shirt basique en coton avec une coupe large. Il est disponible en blanc, et des tailles allant du XS au XXL. Pour commander tout produit nous vous proposons de répondre au formulaire disponible en description du compte et en storie en nous renvoyant une capture d'écran par message ou le formulaire en main propre, avec dans les deux cas une validation du paiement quel que soit le moyen choisi.
         </p>
 
         <select>
@@ -18,6 +18,14 @@
           <option value="M">M</option>
           <option value="L">L</option>
           <option value="XL">XL</option>
+        </select>
+
+        <hr>
+
+        <select>
+          <option value="white">Blanc</option>
+          <option value="black">Noir</option>
+          <option value="red">Rouge</option>
         </select>
 
         <hr>
