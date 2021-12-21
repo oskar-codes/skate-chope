@@ -38,6 +38,25 @@
   .about {
     background-color: #E8EAEC;
   }
+
+  .labels {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+  }
+
+  .label img {
+    width: 200px;
+  }
+
+  .label h3 {
+    color:#1D2023;
+  }
+
+  .label p {
+    color: #bebdbd;
+  }
 </style>
 
 <script>
