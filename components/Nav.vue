@@ -7,11 +7,11 @@
 
     <div class="buttons">
 
-      <button>Home</button>
-      <button>About</button>
-      <button>Notre Histoire</button>
-      <button>Pre-order</button>
-      <button>Pre-Contact</button>
+      <a href="#home">Home</a>
+      <!-- <a href="#about">About</a> -->
+      <a href="#story">Notre Histoire</a>
+      <a href="#shop">Pre-order</a>
+      <a href="#contact">Pre-Contact</a>
 
     </div>
   </div>
@@ -35,18 +35,22 @@
 
   .nav .buttons {
     display: flex;
+    align-items: center;
+    gap: 20px;
   }
 
-  .nav .buttons button {
+  .nav .buttons a {
     border: none;
     background: #333333;
     color: white;
     font-size: 20px;
     cursor: pointer;
+    display: inline-block;
+    text-decoration: none;
   }
 
-  .nav .buttons button:hover {
-    background: #111111;
+  .nav .buttons a:hover {
+    text-decoration: underline;
   }
 
   .nav .left img {

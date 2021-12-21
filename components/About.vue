@@ -1,6 +1,6 @@
 <template>
 
-  <div class="section about">
+  <div id="about" class="section about">
     <h1>About</h1>
     <p></p>
   </div>

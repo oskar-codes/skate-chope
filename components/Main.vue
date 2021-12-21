@@ -1,13 +1,14 @@
 <template>
-  <div class="section main">
+  <div id="home" class="section main">
     <div class="login">
       <h1 class="title">Skate Shope</h1>
 
       <p>{{ action === 'login' ? 'Connectez vous' : 'Créer un compte' }}</p>
       <input v-model="email" type="text" placeholder="Email">
       <input v-model="password" type="password" placeholder="Mot de passe">
-      <button @click="submit">{{ action === 'login' ? 'Connection' : 'Créer le compte' }}</button>
-
+      <button @click="submit">{{ action === 'login' ? 'Connection' : 'Créer le compte' }}</button><br>
+      <button @click="switchAction">{{ action === 'login' ? "Vous n'avez pas de compte?" : 'Vous avez déjà un compte?' }}</button>
+      <span>{{ error }}</span>
     </div>
   </div>
 </template>
@@ -47,19 +48,21 @@ export default Vue.extend({
     return {
       email: '',
       password: '',
-      action: 'login'
+      action: 'login',
+      error: ''
     }
   },
   methods: {
     async submit() {
-      if (this.action == 'login') {
+      if (this.action === 'login') {
         try {
           await this.$fire.auth.signInWithEmailAndPassword(
             this.email,
             this.password
           )
+          console.log(this.$fire.auth.currentUser);
         } catch(e) {
-
+          this.error = e.message;
         }
 
         return;
@@ -71,8 +74,11 @@ export default Vue.extend({
             this.password
           )
         } catch(e) {
-
+          this.error = e.message;
         }
+    },
+    switchAction() {
+      this.action = this.action === 'login' ? 'signup' : 'login';
     }
   }
 });

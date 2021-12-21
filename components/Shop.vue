@@ -1,5 +1,5 @@
 <template>
-  <div class="section shop">
+  <div id="shop" class="section shop">
     <h1>Boutique</h1>
 
     <button class="arrow left" @click="incrementProduct(-1)">&lt;</button>

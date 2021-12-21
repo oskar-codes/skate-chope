@@ -1,6 +1,6 @@
 <template>
 
-  <div class="section story">
+  <div id="story" class="section story">
     <h1>Notre Histoire</h1>
     <p>skate chope est une marque de vêtement crée par deux jeunes entrepeneurs lyonnais</p>
   </div>
