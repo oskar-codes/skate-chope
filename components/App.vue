@@ -1,10 +1,17 @@
-<!-- Please remove this file from your project -->
 <template>
-  <h1>Skate Shope</h1>
+  <div>
+    <Nav></Nav>
+    <Main></Main>
+    <About></About>
+    <Story></Story>
+    <Origins></Origins>
+    <Shop></Shop>
+    <Contact></Contact>
+  </div>
 </template>
 
 <script>
 export default {
-  name: 'NuxtTutorial'
+  name: 'App'
 }
 </script>

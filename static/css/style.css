@@ -1,0 +1,53 @@
+/*section.top-page {
+    background: url('../Image/1ere\ photo.png') ;
+    
+}*/
+
+@font-face {
+  font-family: AbrilFatFace;
+  src: url(../fonts/AbrilFatface-Regular.ttf);
+}
+
+.title {
+  font-family: AbrilFatFace;
+}
+
+@font-face {
+  font-family: Raleway;
+  src: url(../fonts/Raleway-Medium.ttf);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  height: 100%;
+  font-family: Raleway, sans-serif;
+  text-align: center;
+}
+
+.section {
+  padding: 20px;
+}
+
+.labels {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.label img {
+  width: 200px;
+}
+
+.label h3 {
+  color:#1D2023;
+}
+
+.label p {
+  color: #bebdbd;
+
+}
