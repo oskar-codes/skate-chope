@@ -3,9 +3,9 @@
     <div class="login">
       <h1 class="title">Skate Shope</h1>
       <p>Marque vetements</p>
-      <input type="text" placeholder="Email">
-      <input type="password" placeholder="Mot de passe">
-      <button>Submit</button>
+      <input v-model="email" type="text" placeholder="Email">
+      <input v-model="password" type="password" placeholder="Mot de passe">
+      <button @click="login">Submit</button>
     </div>
   </div>
 </template>
@@ -36,7 +36,26 @@
 </style>
 
 <script>
+/*
+import { initializeApp, applicationDefault } from 'firebase-admin';
+initializeApp({
+    credential: applicationDefault(),
+    databaseURL: 'https://skate-shope-default-rtdb.firebaseio.com'
+});*/
+
+
 export default {
-  name: 'Main'
+  name: 'Main',
+  data() {
+    return {
+      email: '',
+      password: ''
+    }
+  },
+  methods: {
+    login() {
+      
+    }
+  }
 }
 </script>

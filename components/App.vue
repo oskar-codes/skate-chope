@@ -2,7 +2,7 @@
   <div>
     <Nav></Nav>
     <Main></Main>
-    <About></About>
+    <!-- <About></About> -->
     <Story></Story>
     <Origins></Origins>
     <Shop></Shop>
