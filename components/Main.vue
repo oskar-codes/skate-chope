@@ -2,10 +2,12 @@
   <div class="section main">
     <div class="login">
       <h1 class="title">Skate Shope</h1>
-      <p>Marque vetements</p>
+
+      <p>{{ action === 'login' ? 'Connectez vous' : 'Créer un compte' }}</p>
       <input v-model="email" type="text" placeholder="Email">
       <input v-model="password" type="password" placeholder="Mot de passe">
-      <button @click="login">Submit</button>
+      <button @click="submit">{{ action === 'login' ? 'Connection' : 'Créer le compte' }}</button>
+
     </div>
   </div>
 </template>
@@ -19,10 +21,11 @@
     margin: 0 auto;
     height: calc(100vh - 100px);
     position: relative;
+    text-align: left;
   }
   .main .login {
     position: absolute;
-    left: 0; top: 50%;
+    left: 20px; top: 50%;
     transform: translateY(-50%);
     color: #c9c9c9;
   }
@@ -36,26 +39,41 @@
 </style>
 
 <script>
-/*
-import { initializeApp, applicationDefault } from 'firebase-admin';
-initializeApp({
-    credential: applicationDefault(),
-    databaseURL: 'https://skate-shope-default-rtdb.firebaseio.com'
-});*/
+import Vue from 'vue';
 
-
-export default {
+export default Vue.extend({
   name: 'Main',
   data() {
     return {
       email: '',
-      password: ''
+      password: '',
+      action: 'login'
     }
   },
   methods: {
-    login() {
-      
+    async submit() {
+      if (this.action == 'login') {
+        try {
+          await this.$fire.auth.signInWithEmailAndPassword(
+            this.email,
+            this.password
+          )
+        } catch(e) {
+
+        }
+
+        return;
+      }
+
+      try {
+          await this.$fire.auth.createUserWithEmailAndPassword(
+            this.email,
+            this.password
+          )
+        } catch(e) {
+
+        }
     }
   }
-}
+});
 </script>

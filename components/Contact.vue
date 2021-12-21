@@ -6,11 +6,9 @@
   <div class="SUIVEZ-NOUS">
     <h1>SUIVEZ NOUS</h1>
     <img src="pictures/insta.webp">
-    <P>@skatechope</P>
+    <p>@skatechope</p>
     </div>
-
-
-
+    <Map></Map>
   </div>
 
   
