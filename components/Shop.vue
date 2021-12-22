@@ -2,31 +2,42 @@
   <div id="shop" class="section shop">
     <h1>Boutique</h1>
 
-    <button class="arrow left" @click="incrementProduct(-1)">&lt;</button>
-    <button class="arrow right" @click="incrementProduct(1)">&gt;</button>
-
     <div class="item">
       <div class="image-container">
-        <img src="pictures/_DSC0888.JPG">
+
+        <transition name="fade">
+          <img :key="imageSrc" 
+               :src="imageSrc"
+               @click="changePicture()">
+        </transition>
+
       </div>
+  
       <div class="details">
         <h3>{{ currentProduct.name }}</h3>
-        <p>€{{ displayPrice }}</p>
         <p>
           {{ currentProduct.description }}
         </p>
 
         <div class="parameter">
+          <span>Prix</span>
+          <span>€{{ displayPrice }}</span>
+        </div>
+
+        <hr>
+
+        <div class="parameter">
           <span>Taille</span>
-          <select>
+          <select class="size">
             <option v-for="size in currentProduct.sizes" :key="size" :value="size">{{ size }}</option>
           </select>
         </div>
 
         <hr>
+        
         <div class="parameter">
           <span>Couleur</span>
-          <select>
+          <select class="color">
             <option v-for="color in currentProduct.colors" :key="color" :value="color">{{ color }}</option>
           </select>
         </div>
@@ -46,10 +57,14 @@
 
         <hr>
 
-        <button>Passer la commande</button>
+        <button @click='addToCart();'>Ajouter au panier</button>
 
       </div>
     </div>
+
+    <button class="arrow left" @click="incrementProduct(-1)">&lt;</button>
+    <button class="arrow right" @click="incrementProduct(1)">&gt;</button>
+
   </div>
 </template>
 
@@ -64,10 +79,8 @@
     text-align: justify;
     justify-content: center;
     gap: 20px;
-  }
-
-  .item .img-container {
-    width: 50%;
+    padding-bottom: 40px;
+    margin: 0 100px;
   }
 
   .item .details {
@@ -78,8 +91,22 @@
     float: right;
   }
 
+  .item .image-container {
+    width: 50%;
+    height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    background: #ddd;
+  }
+
   .item img {
-    height: 500px;
+    max-width: 100%;
+    max-height: 100%;
+    /* width: 100%; */
+    cursor: pointer;
+    position: absolute;
   }
 
   .arrow {
@@ -100,8 +127,34 @@
     justify-content: space-between;
     align-items: center;
   }
-</style>
+  .parameter button {
+    width: 40px;
+    height: 40px;
+    padding: 0;
+  }
+  .parameter>div>span {
+    width: 30px;
+    display: inline-block;
+    text-align: center;
+  }
 
+  @media only screen and (max-width: 700px) {
+    .item {
+      flex-direction: column;
+      margin: 0;
+    }
+    .item .image-container {
+      width: 100%;
+    }
+    .item .details {
+      width: 100%;
+    }
+    .arrow {
+      position: static;
+    }
+  }
+</style>
+  
 <script>
 
 export default {
@@ -110,7 +163,8 @@ export default {
     return {
       amount: 1,
       products: [],
-      productIndex: 0
+      productIndex: 0,
+      pictureIndex: 0
     }
   },
   async fetch() {
@@ -125,7 +179,26 @@ export default {
       return this.price.toFixed(2);
     },
     currentProduct() {
-      return this.products[this.productIndex];
+      const product = this.products[this.productIndex];
+      if (!product) {
+        return {
+          name: '',
+          description: '',
+          sizes: [],
+          colors: [],
+          pictures: [],
+          price: 0
+        }
+      }
+
+      return product;
+    },
+    imageSrc() {
+      const dir = this.currentProduct.pictures.directory;
+      return `pictures/${dir}/${dir} (${this.pictureIndex+1}).jpg`
+    },
+    user() {
+      return this.$fire.auth.currentUser;
     }
   },
   methods: {
@@ -139,6 +212,43 @@ export default {
       this.productIndex += val;
       this.productIndex = mod(this.productIndex, this.products.length);
       this.amount = 1;
+      this.pictureIndex = 0;
+    },
+    changePicture() {
+      this.pictureIndex++;
+      this.pictureIndex = mod(this.pictureIndex, this.currentProduct.pictures.amount);
+    },
+    async addToCart() {
+      if (this.user) {
+
+        const ref = this.$fire.database.ref(`/users/${this.user.uid}/cart`);
+
+        const data = await ref.once('value');
+        const cart = data.val();
+
+        const color = document.querySelector('.color').value;
+        const size = document.querySelector('.size').value;
+
+        if (!cart) {
+          await ref.set([{
+            id: this.productIndex,
+            amount: this.amount,
+            color, size
+          }]);
+          return;
+        }
+
+        cart.push({
+          id: this.productIndex,
+            amount: this.amount,
+            color, size
+        });
+
+        ref.set(cart);
+
+      } else {
+        this.$emit('togglePopup');
+      }
     }
   }
 }

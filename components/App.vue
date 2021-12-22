@@ -1,17 +1,32 @@
 <template>
   <div>
-    <Nav></Nav>
-    <Main></Main>
-    <!-- <About></About> -->
-    <Story></Story>
-    <Origins></Origins>
-    <Shop></Shop>
-    <Contact></Contact>
+    <Nav/>
+    <Main @togglePopup="togglePopup"/>
+    <!-- <About/> -->
+    <Story/>
+    <Origins/>
+    <Shop @togglePopup="togglePopup"/>
+    <Contact/>
+
+    <transition name="fade">
+      <LoginPopup @togglePopup="togglePopup" v-if="showPopup"/>
+    </transition>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'App'
+  name: 'App',
+  data() {
+    return {
+      showPopup: false
+    }
+  },
+  methods: {
+    togglePopup() {
+      console.log('test');
+      this.showPopup = !this.showPopup;
+    }
+  }
 }
 </script>

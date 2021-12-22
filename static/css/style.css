@@ -28,24 +28,41 @@ html, body {
   scroll-behavior: smooth;
 }
 
-button {
+button, input, .button {
+  color: black;
+  text-decoration: none;
   border: none;
   background: white;
-  padding: 10px;
-  border-radius: 5px;
+  padding: 15px;
+  border-radius: 50px;
   cursor: pointer;
   margin: 5px;
+  font-size: 18px;
+  /* box-sizing: content-box; */
+  transition: color 0.3s ease, background 0.3s ease;
+}
+
+button:hover, .button:hover {
+  background: black;
+  color: white;
+}
+
+a {
+  color: white;
+  text-decoration: none;
 }
 
 .section {
   padding: 20px;
 }
 
-#map {
-  height: 100%;
+hr {
+  border-style: solid;
 }
-html, body {
-  height: 100%;
-  margin: 0;
-  padding: 0;
+
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .5s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
 }

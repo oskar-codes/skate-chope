@@ -3,12 +3,13 @@
     <div class="login">
       <h1 class="title">Skate Shope</h1>
 
-      <p>{{ action === 'login' ? 'Connectez vous' : 'Créer un compte' }}</p>
-      <input v-model="email" type="text" placeholder="Email">
-      <input v-model="password" type="password" placeholder="Mot de passe">
-      <button @click="submit">{{ action === 'login' ? 'Connection' : 'Créer le compte' }}</button><br>
-      <button @click="switchAction">{{ action === 'login' ? "Vous n'avez pas de compte?" : 'Vous avez déjà un compte?' }}</button>
-      <span>{{ error }}</span>
+
+      <div v-if="isSignedIn">
+        <p>Bienvenue {{ user.email }}</p>
+        <NuxtLink :to="`users/${user.uid}`" class="button">Votre Panier</NuxtLink>
+        <button @click="logOut">Déconnection</button>
+      </div>
+      <button v-else @click="$emit('togglePopup')">Connectez vous</button>
     </div>
   </div>
 </template>
@@ -18,7 +19,7 @@
     background-image: url(../static/pictures/principal.jpg);
     background-repeat: no-repeat;
     background-size: cover;
-    width: 80%;
+    width: 100%;
     margin: 0 auto;
     height: calc(100vh - 100px);
     position: relative;
@@ -29,13 +30,15 @@
     left: 20px; top: 50%;
     transform: translateY(-50%);
     color: #c9c9c9;
+    width: 80%;
   }
-  .main button, .main input {
-    padding: 5px; 
-    background: white;
-    border: none;
-    border-radius: 5px;
-    margin: 5px;
+
+  @media only screen and (max-width:700px) {
+    .main .login {
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+    }
   }
 </style>
 
@@ -46,40 +49,28 @@ export default Vue.extend({
   name: 'Main',
   data() {
     return {
-      email: '',
-      password: '',
-      action: 'login',
-      error: ''
+      isSignedIn: false
     }
   },
   methods: {
-    async submit() {
-      if (this.action === 'login') {
-        try {
-          await this.$fire.auth.signInWithEmailAndPassword(
-            this.email,
-            this.password
-          )
-          console.log(this.$fire.auth.currentUser);
-        } catch(e) {
-          this.error = e.message;
-        }
-
-        return;
-      }
-
-      try {
-          await this.$fire.auth.createUserWithEmailAndPassword(
-            this.email,
-            this.password
-          )
-        } catch(e) {
-          this.error = e.message;
-        }
-    },
-    switchAction() {
-      this.action = this.action === 'login' ? 'signup' : 'login';
+    logOut() {
+      this.$fire.auth.signOut();
     }
+  },
+  computed: {
+    user() {
+      return this.$fire.auth.currentUser;
+    }
+  },
+  created() {
+    this.$fire.auth.onAuthStateChanged(user => {
+      if (user) {
+        this.isSignedIn = true;
+        this.$fire.database.ref(`/users/${user.uid}/email`).set(user.email)
+      } else {
+        this.isSignedIn = false;
+      }
+    });
   }
 });
 </script>

@@ -62,10 +62,10 @@
 
   .label-section {
     display: flex;
-    grid-gap: 20px;
     gap: 20px;
     justify-content: center;
     align-items: stretch;
+    flex-wrap: wrap;
   }
 
   .label img {

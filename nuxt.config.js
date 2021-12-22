@@ -31,33 +31,24 @@ export default {
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
   ],
-  a:{
-    apiKey: "AIzaSyAbUbveOjn6VMB1QaAZHIR2hYxFfEbQ2Qo",
-    authDomain: "artridge-website.firebaseapp.com",
-    databaseURL: "https://artridge-website.firebaseio.com",
-    projectId: "artridge-website",
-    storageBucket: "artridge-website.appspot.com",
-    messagingSenderId: "554359864126",
-    appId: "1:554359864126:web:56901925bba81278fb0a6f",
-    measurementId: "G-0KJBNGLJL4"
-  },
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     [
       '@nuxtjs/firebase',
       {
         config: {
-          apiKey: "AIzaSyAbUbveOjn6VMB1QaAZHIR2hYxFfEbQ2Qo",
-          authDomain: "artridge-website.firebaseapp.com",
-          databaseURL: "https://artridge-website.firebaseio.com",
-          projectId: "artridge-website",
-          storageBucket: "artridge-website.appspot.com",
-          messagingSenderId: "554359864126",
-          appId: "1:554359864126:web:56901925bba81278fb0a6f",
-          measurementId: "G-0KJBNGLJL4"
+          apiKey: "AIzaSyBxwx4DJ6mE91IyT-6FBaNm4XYNV36MlQ8",
+          authDomain: "skate-shope.firebaseapp.com",
+          databaseURL: "https://skate-shope-default-rtdb.firebaseio.com",
+          projectId: "skate-shope",
+          storageBucket: "skate-shope.appspot.com",
+          messagingSenderId: "113383502619",
+          appId: "1:113383502619:web:2d81ce57260f841ee199be",
+          measurementId: "G-PXQMT83XNY"
         },
         services: {
-          auth: true
+          auth: true,
+          database: true
         }
       }
     ]
