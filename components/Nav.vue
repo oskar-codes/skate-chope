@@ -79,10 +79,10 @@
   @media only screen and (max-width: 700px) {
     .nav {
       display: block;
-      transition: margin 0.1s ease;
+      transition: margin 0.2s ease;
     }
     .nav.nav-open {
-      margin-bottom: 132px;
+      margin-bottom: 138px;
     }
     .nav .left {
       height: 100%;
@@ -102,16 +102,17 @@
       height: 0px;
       overflow: hidden;
       flex-direction: column;
-      transition: height 0.1s ease;
+      transition: height 0.2s ease;
     }
     .nav .buttons a {
       margin: 0;
       padding: 10px 0;
       background: #222;
+      border-bottom: 3px solid black;
       width: 100%;
     }
     .buttons.nav-open {
-      height: 132px;
+      height: 138px;
     }
   }
 </style>

@@ -1,7 +1,6 @@
 <template>
   <div>
     <div class="popup">
-      <button @click="$emit('togglePopup')" class="cancel">╳</button>
       <h1>{{ 
         isLogin ? 
         'Connectez vous' :
@@ -15,13 +14,15 @@
         <p style="color: red;">{{ error }}</p>
 
         <input class="button" type="submit" @click="submit" :value="isLogin ? 'Connection' : 'Créer le compte'">
-        
-        <p class="link" @click="toggleAction">{{ 
-          isLogin ? 
-          `Vous n'avez pas de compte?` :
-          'Vous avez déjà un compte?'}}</p>
 
       </form>
+
+      <button @click="$emit('togglePopup')" class="cancel">╳</button>
+      <p class="link" @click="toggleAction">{{ 
+            isLogin ? 
+            `Vous n'avez pas de compte?` :
+            'Vous avez déjà un compte?'}}</p>
+    
     </div>
     <div class="background" @click="$emit('togglePopup')"></div>
   </div>
@@ -56,7 +57,7 @@
   }
   .cancel {
     position: absolute;
-    right: 20px;
+    right: 20px; top: 20px;
     width: 58px; height: 58px;
   }
   @media only screen and (max-width:700px) {
@@ -64,6 +65,9 @@
       width: 100%;
       height: 100%;
       border-radius: 0;
+    }
+    .popup>h1 {
+      margin-top: 80px;
     }
   }
 </style>

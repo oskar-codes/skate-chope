@@ -67,11 +67,29 @@
     padding: 20px 0;
     height: calc(100vh - 100px);
     background: #eee;
+    overflow-x: hidden;
   }
   td button {
     width: 35px; height: 35px;
     font-size: 10px;
     padding: 0;
+  }
+  @media only screen and (max-width:700px) {
+    /*table, thead, tbody, th, td, tr {
+      display: block;
+    }
+    thead {
+      position: absolute;
+      top: -9999px;
+      left: -9999px;
+    }
+    td {
+      position: relative;
+      width: fit-content;
+      display: inline;
+      border: none;
+      width: 100%;
+    }*/
   }
 </style>
 

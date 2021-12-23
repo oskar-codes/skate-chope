@@ -57,7 +57,10 @@
 
         <hr>
 
-        <button @click='addToCart();'>Ajouter au panier</button>
+        <button :class="{ 
+          success: buttonStatus === 'green',
+          error: buttonStatus === 'red'
+        }" @click='addToCart();'>Ajouter au panier</button>
 
       </div>
     </div>
@@ -137,6 +140,34 @@
     display: inline-block;
     text-align: center;
   }
+  .details > button.success {
+    background-color: #4fdc7b;
+    color: #4fdc7b
+  }
+  .details > button.error {
+    background-color: #ec4144;
+    color: #ec4144
+  }
+  .details > button {
+    position: relative;
+  }
+  .details > button::after {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    color: white;
+    opacity: 0;
+    transition: opacity 0.1s ease;
+  }
+  .details > button.success::after {
+    opacity: 1;
+    content: '✓';
+  }
+  .details > button.error::after {
+    opacity: 1;
+    content: '╳';
+  }
 
   @media only screen and (max-width: 700px) {
     .item {
@@ -164,7 +195,8 @@ export default {
       amount: 1,
       products: [],
       productIndex: 0,
-      pictureIndex: 0
+      pictureIndex: 0,
+      buttonStatus: ''
     }
   },
   async fetch() {
@@ -222,19 +254,32 @@ export default {
       if (this.user) {
 
         const ref = this.$fire.database.ref(`/users/${this.user.uid}/cart`);
+        
+        let data;
+        try {
+          data = await ref.once('value');
+        } catch(e) {
+          this.error();
+          return;
+        }
 
-        const data = await ref.once('value');
         const cart = data.val();
 
         const color = document.querySelector('.color').value;
         const size = document.querySelector('.size').value;
 
         if (!cart) {
-          await ref.set([{
-            id: this.productIndex,
-            amount: this.amount,
-            color, size
-          }]);
+          try {
+            await ref.set([{
+              id: this.productIndex,
+              amount: this.amount,
+              color, size
+            }]);
+            this.success();
+          } catch (e) {
+            console.error(e);
+            this.error();
+          }
           return;
         }
 
@@ -244,11 +289,28 @@ export default {
             color, size
         });
 
-        ref.set(cart);
-
+        try {
+          await ref.set(cart);
+          this.success();
+        } catch (e) {
+          console.error(e);
+          this.error();
+        }
       } else {
         this.$emit('togglePopup');
       }
+    },
+    success() {
+      this.buttonStatus = 'green';
+      setTimeout(() => {
+        this.buttonStatus = '';
+      }, 1e3);
+    },
+    error() {
+      this.buttonStatus = 'red';
+      setTimeout(() => {
+        this.buttonStatus = '';
+      }, 1e3);
     }
   }
 }
