@@ -168,7 +168,7 @@ export default {
     }
   },
   async fetch() {
-    const data = await fetch('https://skate-shope-default-rtdb.firebaseio.com/products.json');
+    const data = await fetch('https://skate-chope-d6d23-default-rtdb.firebaseio.com/products.json');
     this.products = await data.json();
   },
   computed: {

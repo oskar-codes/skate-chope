@@ -112,7 +112,7 @@ export default Vue.extend({
         return;
       }
 
-      const products = await fetch('https://skate-shope-default-rtdb.firebaseio.com/products.json');
+      const products = await fetch('https://skate-chope-d6d23-default-rtdb.firebaseio.com/products.json');
       this.products = await products.json();
 
       const data = await this.$fire.database.ref(`/users/${user.uid}`).once('value');

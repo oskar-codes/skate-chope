@@ -6,7 +6,7 @@
       </NuxtLink>
 
       <NuxtLink to="/">
-        <h1 class="title">Skate Shope</h1>
+        <h1 class="title">Skate Chope</h1>
       </NuxtLink>
       
       <div class="burger" @click="toggleNav();">≡</div>

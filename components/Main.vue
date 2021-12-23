@@ -1,7 +1,7 @@
 <template>
   <div id="home" class="section main">
     <div class="login">
-      <h1 class="title">Skate Shope</h1>
+      <h1 class="title">Skate Chope</h1>
 
 
       <div v-if="isSignedIn">

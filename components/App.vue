@@ -24,7 +24,6 @@ export default {
   },
   methods: {
     togglePopup() {
-      console.log('test');
       this.showPopup = !this.showPopup;
     }
   }

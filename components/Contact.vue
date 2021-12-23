@@ -8,7 +8,7 @@
       <h1>SUIVEZ NOUS</h1>
       <img src="pictures/insta.webp">
 
-      <a style="display: block;" href="https://instagram.com/skatechope">@skateshope</a>
+      <a style="display: block;" href="https://instagram.com/skatechope">@skatechope</a>
     </div>
     
     <Map></Map>

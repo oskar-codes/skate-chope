@@ -37,14 +37,13 @@ export default {
       '@nuxtjs/firebase',
       {
         config: {
-          apiKey: "AIzaSyBxwx4DJ6mE91IyT-6FBaNm4XYNV36MlQ8",
-          authDomain: "skate-shope.firebaseapp.com",
-          databaseURL: "https://skate-shope-default-rtdb.firebaseio.com",
-          projectId: "skate-shope",
-          storageBucket: "skate-shope.appspot.com",
-          messagingSenderId: "113383502619",
-          appId: "1:113383502619:web:2d81ce57260f841ee199be",
-          measurementId: "G-PXQMT83XNY"
+          apiKey: "AIzaSyCGNChG909iKXeochDI1Fs6Gg863qnKtZg",
+          authDomain: "skate-chope-d6d23.firebaseapp.com",
+          projectId: "skate-chope-d6d23",
+          storageBucket: "skate-chope-d6d23.appspot.com",
+          messagingSenderId: "1091947718576",
+          appId: "1:1091947718576:web:f27e9d62dcab14af3c9875",
+          measurementId: "G-ZT9ZYQQYN6"
         },
         services: {
           auth: true,
