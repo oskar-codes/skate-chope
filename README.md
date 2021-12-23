@@ -1,4 +1,4 @@
-# skate-shope
+# skate-chope
 
 ## Build Setup
 
