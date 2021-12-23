@@ -187,8 +187,9 @@
 </style>
   
 <script>
+import Vue from 'vue';
 
-export default {
+export default Vue.extend({
   name: 'Shop',
   data() {
     return {
@@ -228,9 +229,6 @@ export default {
     imageSrc() {
       const dir = this.currentProduct.pictures.directory;
       return `pictures/${dir}/${dir} (${this.pictureIndex+1}).jpg`
-    },
-    user() {
-      return this.$fire.auth.currentUser;
     }
   },
   methods: {
@@ -251,9 +249,9 @@ export default {
       this.pictureIndex = mod(this.pictureIndex, this.currentProduct.pictures.amount);
     },
     async addToCart() {
-      if (this.user) {
+      if (this.user()) {
 
-        const ref = this.$fire.database.ref(`/users/${this.user.uid}/cart`);
+        const ref = this.$fire.database.ref(`/users/${this.user().uid}/cart`);
         
         let data;
         try {
@@ -311,9 +309,12 @@ export default {
       setTimeout(() => {
         this.buttonStatus = '';
       }, 1e3);
+    },
+    user() {
+      return this.$fire.auth.currentUser;
     }
   }
-}
+});
 
 function mod(x, y) {
   return (x % y + y) % y;

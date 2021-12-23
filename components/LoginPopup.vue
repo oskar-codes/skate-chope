@@ -120,6 +120,7 @@ export default {
     },
     toggleAction() {
       this.isLogin = !this.isLogin;
+      this.error = '';
     }
   }
 }

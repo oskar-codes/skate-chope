@@ -23,7 +23,7 @@
               <td>{{ article.color }}</td>
               <td>{{ article.size }}</td>
               <td>{{ article.amount }}</td>
-              <td>${{ (products[article.id].price * article.amount).toFixed(2) }}</td>
+              <td>€{{ (products[article.id].price * article.amount).toFixed(2) }}</td>
               <td><button @click="removeArticle(index)">╳</button></td>
             </tr>
 
@@ -33,7 +33,7 @@
               <td></td>
               <td></td>
               <td>Total: </td>
-              <td>${{ totalPrice }}</td>
+              <td>€{{ totalPrice }}</td>
             </tr>
           </tbody>
         </table>
