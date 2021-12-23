@@ -1,5 +1,6 @@
 <template>
-  <div id="home" class="section main">
+  <div id="home" class="section main"
+    :style="`background-position-y: ${yPos}px`">
     <div class="login">
       <h1 class="title">Skate Chope</h1>
 
@@ -49,12 +50,16 @@ export default Vue.extend({
   name: 'Main',
   data() {
     return {
-      isSignedIn: false
+      isSignedIn: false,
+      yPos: -100
     }
   },
   methods: {
     logOut() {
       this.$fire.auth.signOut();
+    },
+    handleScroll(e) {
+      this.yPos = window.scrollY * 0.7 - 100;
     }
   },
   computed: {
@@ -66,11 +71,13 @@ export default Vue.extend({
     this.$fire.auth.onAuthStateChanged(user => {
       if (user) {
         this.isSignedIn = true;
-        this.$fire.database.ref(`/users/${user.uid}/email`).set(user.email)
+        this.$fire.database.ref(`/users/${user.uid}/email`).set(user.email);
       } else {
         this.isSignedIn = false;
       }
     });
+
+    if (process.browser) window.addEventListener('scroll', this.handleScroll);
   }
 });
 </script>
