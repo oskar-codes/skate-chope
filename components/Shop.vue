@@ -37,7 +37,8 @@
         
         <div class="parameter">
           <span>Couleur</span>
-          <select class="color">
+          <div class="color-box" :style="{ backgroundColor: currentColor }"></div>
+          <select class="color" v-model="col">
             <option v-for="color in currentProduct.colors" :key="color" :value="color">{{ color }}</option>
           </select>
         </div>
@@ -130,6 +131,13 @@
     justify-content: space-between;
     align-items: center;
   }
+  .parameter .color-box {
+    width: 30px; height: 30px;
+    border-radius: 4px;
+    margin-left: auto;
+    margin-right: 10px;
+    border: 2px solid black;
+  }
   .parameter button {
     width: 40px;
     height: 40px;
@@ -197,12 +205,14 @@ export default Vue.extend({
       products: [],
       productIndex: 0,
       pictureIndex: 0,
-      buttonStatus: ''
+      buttonStatus: '',
+      col: ''
     }
   },
   async fetch() {
     const data = await fetch('https://skate-chope-d6d23-default-rtdb.firebaseio.com/products.json');
     this.products = await data.json();
+    this.col = this.products[this.productIndex].colors[0];
   },
   computed: {
     price() {
@@ -210,6 +220,35 @@ export default Vue.extend({
     },
     displayPrice() {
       return this.price.toFixed(2);
+    },
+    currentColor() {
+      const colors = {
+        'White'               : 'white',
+        'Black'               : 'black',
+        'Vintage White'       : '#e5e5db',
+        'Anthracite'          : '#383e42',
+        'Opal'                : '#a8c3bc',
+        'Spectra Yellow'      : '#ffc007',
+        'Varsity Green'       : '#3e6168',
+        'Bottle Green'        : '#006a4e',
+        'Khaki'               : '#302e1c',
+        'Stem Green'          : '#adc875',
+        'Caribbean Blue'      : '#1ac1dd',
+        'Serene Blue'         : '#b5d7e8',
+        'Sky Blue'            : '#87ceeb',
+        'Royal Blue'          : '#4169e1',
+        'India Ink Grey'      : '#232732',
+        'French Navy'         : '#0072bb',
+        'Red'                 : 'red',
+        'Burgundy'            : '#800020',
+        'Cotton Pink'         : '#ffbcd9',
+        'Canyon Pink'         : '#e7c2bd',
+        'Bright Orange'       : '#ffa500',
+        'Dark Heather Indigo' : '#36498f',
+        'Heather Grey'        : '#d9d9d6',
+        'Dark Heather Grey'   : '#2d3033'
+      }
+      return colors[this.col];
     },
     currentProduct() {
       const product = this.products[this.productIndex];
