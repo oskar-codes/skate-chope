@@ -14,13 +14,9 @@
 
 
     <div class="buttons" :class="{ 'nav-open': navOpen }">
-
-      <!-- <a href="#about">About</a> -->
-      <!-- <NuxtLink to="/#home">Home</NuxtLink> -->
       <NuxtLink to="/#story">Notre Histoire</NuxtLink>
       <NuxtLink to="/#shop">Pre-order</NuxtLink>
-      <NuxtLink to="/#contact">Pre-Contact</NuxtLink>
-
+      <NuxtLink to="/#contact">Contact</NuxtLink>
     </div>
   </div>
 </template>

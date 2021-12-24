@@ -77,7 +77,10 @@ export default Vue.extend({
       }
     });
 
-    if (process.browser) window.addEventListener('scroll', this.handleScroll);
+    if (process.browser) {
+      window.addEventListener('scroll', this.handleScroll);
+      window.addEventListener('touchmove', this.handleScroll);
+    }
   }
 });
 </script>
