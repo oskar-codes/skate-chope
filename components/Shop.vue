@@ -58,11 +58,14 @@
 
         <hr>
 
-        <button :class="{ 
-          success: buttonStatus === 'green',
-          error: buttonStatus === 'red'
-        }" @click='addToCart();'>Ajouter au panier</button>
+        <div class="action-container">
+          <button :class="{ 
+            success: buttonStatus === 'green',
+            error: buttonStatus === 'red'
+          }" @click='addToCart();'>Ajouter au panier</button>
 
+          <NuxtLink v-if="isSignedIn" class="button" :to="`users/${user.uid}`">Votre Panier</NuxtLink>
+        </div>
       </div>
     </div>
 
@@ -89,10 +92,6 @@
 
   .item .details {
     width: 50%;
-  }
-
-  .item .details > button {
-    float: right;
   }
 
   .item .image-container {
@@ -148,18 +147,23 @@
     display: inline-block;
     text-align: center;
   }
-  .details > button.success {
+  .action-container {
+    display: flex;
+    white-space: nowrap;
+    justify-content: center;
+  }
+  .action-container > button.success {
     background-color: #4fdc7b;
     color: #4fdc7b
   }
-  .details > button.error {
+  .action-container > button.error {
     background-color: #ec4144;
     color: #ec4144
   }
-  .details > button {
+  .action-container > button {
     position: relative;
   }
-  .details > button::after {
+  .action-container > button::after {
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
@@ -168,11 +172,11 @@
     opacity: 0;
     transition: opacity 0.1s ease;
   }
-  .details > button.success::after {
+  .action-container > button.success::after {
     opacity: 1;
     content: '✓';
   }
-  .details > button.error::after {
+  .action-container > button.error::after {
     opacity: 1;
     content: '╳';
   }
@@ -206,7 +210,8 @@ export default Vue.extend({
       productIndex: 0,
       pictureIndex: 0,
       buttonStatus: '',
-      col: ''
+      col: '',
+      isSignedIn: false
     }
   },
   async fetch() {
@@ -352,6 +357,16 @@ export default Vue.extend({
     user() {
       return this.$fire.auth.currentUser;
     }
+  },
+  created() {
+    this.$fire.auth.onAuthStateChanged(user => {
+      if (user) {
+        this.isSignedIn = true;
+        this.$fire.database.ref(`/users/${user.uid}/email`).set(user.email);
+      } else {
+        this.isSignedIn = false;
+      }
+    });
   }
 });
 

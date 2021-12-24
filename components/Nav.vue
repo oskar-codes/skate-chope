@@ -14,10 +14,11 @@
 
 
     <div class="buttons" :class="{ 'nav-open': navOpen }">
-      <NuxtLink to="/#story">Notre Histoire</NuxtLink>
-      <NuxtLink to="/#shop">Pre-order</NuxtLink>
-      <NuxtLink to="/#contact">Contact</NuxtLink>
+      <NuxtLink to="/#story">Notre Histoire </NuxtLink>
+      <NuxtLink to="/#shop">Shop </NuxtLink>
+      <NuxtLink to="/#contact">Contact </NuxtLink>
     </div>
+    
   </div>
 </template>
 

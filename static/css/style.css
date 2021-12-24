@@ -42,6 +42,10 @@ button, input, .button {
   transition: color 0.3s ease, background 0.3s ease;
 }
 
+.section > h1 {
+  text-decoration: underline;
+}
+
 input {
   cursor: text;
 }
