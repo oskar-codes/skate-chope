@@ -158,7 +158,7 @@
   }
   .action-container > button.error {
     background-color: #ec4144;
-    color: #ec4144
+    color: #ec4144;
   }
   .action-container > button {
     position: relative;

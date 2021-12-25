@@ -4,13 +4,15 @@
     <div class="login">
       <h1 class="title">Skate Chope</h1>
 
-
-      <div v-if="isSignedIn">
-        <p>Bienvenue {{ user.email }}</p>
-        <NuxtLink :to="`users/${user.uid}`" class="button">Votre Panier</NuxtLink>
-        <button @click="logOut">Déconnection</button>
+      <div v-if="loading">Chargement...</div>
+      <div v-else>
+        <div v-if="isSignedIn">
+          <p>Bienvenue {{ user.email }}</p>
+          <NuxtLink :to="`users/${user.uid}`" class="button">Votre Panier</NuxtLink>
+          <button @click="logOut">Déconnection</button>
+        </div>
+        <button v-else @click="$emit('togglePopup')">Connectez vous</button>
       </div>
-      <button v-else @click="$emit('togglePopup')">Connectez vous</button>
     </div>
   </div>
 </template>
@@ -51,14 +53,16 @@ export default Vue.extend({
   data() {
     return {
       isSignedIn: false,
-      yPos: -100
+      yPos: -100,
+      loading: true
     }
   },
   methods: {
     logOut() {
       this.$fire.auth.signOut();
     },
-    handleScroll(e) {
+    handleScroll() {
+      if (window.innerWidth <= 700) return this.yPos = 0;
       this.yPos = window.scrollY * 0.7 - 100;
     }
   },
@@ -68,16 +72,22 @@ export default Vue.extend({
     }
   },
   created() {
-    this.$fire.auth.onAuthStateChanged(user => {
+    this.$fire.auth.onAuthStateChanged(async user => {
+      this.loading = true;
       if (user) {
+        await this.$fire.database.ref(`/users/${user.uid}/email`).set(user.email);
+        this.loading = false;
         this.isSignedIn = true;
-        this.$fire.database.ref(`/users/${user.uid}/email`).set(user.email);
       } else {
+        this.loading = false;
         this.isSignedIn = false;
       }
     });
 
     if (process.browser) {
+      if (window.innerWidth <= 700) {
+        this.yPos = 0;
+      }
       window.addEventListener('scroll', this.handleScroll);
       window.addEventListener('touchmove', this.handleScroll);
     }
