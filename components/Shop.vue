@@ -64,7 +64,7 @@
             error: buttonStatus === 'red'
           }" @click='addToCart();'>Ajouter au panier</button>
 
-          <NuxtLink v-if="isSignedIn" class="button" :to="`users/${user.uid}`">Votre Panier</NuxtLink>
+          <NuxtLink v-if="isSignedIn" class="button" :to="`users/${user().uid}`">Votre Panier</NuxtLink>
         </div>
       </div>
     </div>
